@@ -1,4 +1,4 @@
-import "@/home/styles/Detail.less";
+import "@/modules/home/styles/Detail.less";
 
 const Detail = () => {
   return <div>Detail</div>;
