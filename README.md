@@ -38,9 +38,9 @@ yarn add babel-loader@8.2.5 -D
 yarn add babel-preset-react-app@10.0.1 -D
 
 # 安装react相关库
-yarn add react@^18.1.0 -D
-yarn add react-dom@^18.1.0 -D
-yarn add react-router-dom@^6.3.0 -D
+yarn add react@^18.1.0
+yarn add react-dom@^18.1.0
+yarn add react-router-dom@^6.3.0
 
 # 在package.json当中配置browserslist字段，配置需要兼容的浏览器
 "browserslist": [
