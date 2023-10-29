@@ -51,4 +51,7 @@ yarn add react-router-dom@^6.3.0
 
 # 安装cross-env，修改package.json当中scripts命名，添加环境变量
 yarn add cross-env@7.0.3 -D
+
+# 安装antd
+yarn add antd@4.20.3
 ```
