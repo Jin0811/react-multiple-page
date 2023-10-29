@@ -2,11 +2,15 @@ const path = require("path");
 const { generateOptionsByModuleConfig } = require("./config.util");
 
 // 生成entry、htmlWebpackPlugin、copyWebpackPlugin的配置项
-const { entrysObject, htmlWebpackPluginArray, copyWebpackPluginArray } = generateOptionsByModuleConfig();
+const { entrysObject, htmlWebpackPluginArray, copyWebpackPluginArray } =
+  generateOptionsByModuleConfig();
+
+// 判断是否为生产模式
+const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
   // 模式
-  mode: "production", // development 开发 | production 生产
+  mode: isProduction ? "production" : "development", // development 开发 | production 生产
 
   // 入口
   entry: entrysObject,
@@ -14,8 +18,18 @@ module.exports = {
   // 输出
   output: {
     path: path.resolve(__dirname, "../dist"), // 打包文件目录
-    filename: "[name]/[name].bundle.js", // 配置打包文件的命名规则
+
+    // contenthash根据文件内容生成 hash 值，只有文件内容变化了，hash 值才会变化。所有文件 hash 值是独享且不同的
+    // 使用contenthash可以实现，在进行静态资源缓存的时候，我们发布了新的版本后，浏览器可以进行更新
+    // 如果使用不使用contenthash，那每次的打包之后的入口文件都是main.js，浏览器每次都会去读取缓存
+    filename: isProduction
+      ? "[name]/[name].[contenthash:10].js"
+      : "[name]/[name].js",
+    chunkFilename: isProduction
+      ? "static/js/[name].[contenthash:10].chunk.js"
+      : "static/js/[name].chunk.js",
     assetModuleFilename: "static/media/[hash:8][ext][query]", // 资源文件目录
+
     clean: true, // 在生成新的打包文件之前清空上一次的打包目录
   },
 
@@ -38,7 +52,7 @@ module.exports = {
         type: "asset",
         parser: {
           dataUrlCondition: {
-            maxSize: 20 * 1024, // 
+            maxSize: 20 * 1024, //
           },
         },
       },
@@ -67,17 +81,17 @@ module.exports = {
         test: /\.jsx$/,
         exclude: /node_modules/, // 排除node_modules下的文件
         use: {
-          loader: path.resolve(__dirname, "./loaders/auto-import-react-loader.js"),
+          loader: path.resolve(
+            __dirname,
+            "./loaders/auto-import-react-loader.js"
+          ),
         },
       },
     ],
   },
 
   // 插件
-  plugins: [
-    ...htmlWebpackPluginArray,
-    ...copyWebpackPluginArray,
-  ],
+  plugins: [...htmlWebpackPluginArray, ...copyWebpackPluginArray],
 
   // 解析
   resolve: {
@@ -88,11 +102,48 @@ module.exports = {
     extensions: [".jsx", ".js", ".json"], // 自动补全文件扩展名
   },
 
+  // SourceMap配置，开发模式和生产模式使用不同的配置
+  devtool: isProduction ? "source-map" : "cheap-module-source-map",
+
+  // 关闭性能分析，提升速度
+  performance: false,
+
   // 优化：代码分割，代码压缩等
   optimization: {
-
+    splitChunks: {
+      cacheGroups: {
+        // 拆分代码，对src/utils目录下的js文件进行单独打包
+        utils: {
+          test: /(src\\utils\\.*\.js)$/,
+          name: "utils",
+          chunks: "initial",
+          priority: -10,
+          minSize: 0, // 默认为20000B，即19.53KB
+          minChunks: 2,
+          filename: "static/js/[name].bundle.js",
+        },
+        // 拆分代码，对src/components目录下的jsx文件进行单独打包
+        components: {
+          test: /(src\\components\\.*\.jsx)$/,
+          name: "components",
+          chunks: "initial",
+          priority: -10,
+          minSize: 0, // 默认为20000B，即19.53KB
+          minChunks: 2,
+          filename: "static/js/[name].bundle.js",
+        },
+      },
+    },
+    // 提取runtime文件，目的是为了避免文件的频繁变更导致浏览器缓存失效，更好地利用缓存，提升用户体验
+    runtimeChunk: {
+      name: (entrypoint) => `${entrypoint.name}/runtime`,
+    },
   },
 
   // webpack-dev-server
-  devServer: {},
+  devServer: {
+    host: "localhost", // 启动的服务器域名
+    port: "3000", // 启动的服务器端口
+    open: ["/home"], // 自动打开指定页面
+  },
 };
