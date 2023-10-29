@@ -3,7 +3,6 @@
  * 在此组件内可以进行一些全局配置和拦截
  */
 
-import React from "react";
 import { HashRouter } from "react-router-dom";
 
 const RootComponent = (props) => {

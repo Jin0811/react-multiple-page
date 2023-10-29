@@ -62,6 +62,14 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      // 自动导入react的自定义loader，只针对jsx文件
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/, // 排除node_modules下的文件
+        use: {
+          loader: path.resolve(__dirname, "./loaders/auto-import-react-loader.js"),
+        },
+      },
     ],
   },
 
