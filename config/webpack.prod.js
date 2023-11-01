@@ -1,6 +1,7 @@
 const path = require("path");
 const { generateOptionsByModuleConfig } = require("./config.util");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // 生成entry、htmlWebpackPlugin、copyWebpackPlugin的配置项
 const { entrysObject, htmlWebpackPluginArray, copyWebpackPluginArray } =
@@ -40,12 +41,22 @@ module.exports = {
       // 处理CSS
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [
+          // style-loader会将js中的css通过创建style标签的形式添加到页面当中
+          // MiniCssExtractPlugin.loader会将CSS抽取成单独的文件，通过link标签的形式添加到页面上
+          // 生产模式下，建议使用MiniCssExtractPlugin.loader
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader", // css-loader会将css资源编译成commonjs的一个模块到js当中
+        ],
       },
       // 处理less
       {
         test: /\.less$/i,
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          "less-loader",
+        ],
       },
       // 处理图片资源，针对小于20kb的图片进行base64处理，减少网络请求
       {
@@ -91,9 +102,6 @@ module.exports = {
               // cacheCompression 默认为 true，将缓存内容压缩为 gz 包以减⼩缓存⽬录的体积。在设为 false 的情况下将跳过压缩和解压的过程，从⽽提升这⼀阶段的速度
               // 即不对babel的文件进行压缩，这样虽然会占用多一点的电脑空间，但是提升了速度，以空间换时间
               cacheCompression: false,
-              plugins: [
-                "react-refresh/babel", // react项目当中开启JS的HMR功能
-              ],
             },
           },
           {
@@ -111,7 +119,6 @@ module.exports = {
   plugins: [
     ...htmlWebpackPluginArray, // 生成html文件
     ...copyWebpackPluginArray, // 复制public目录下的文件到打包目录
-    new ReactRefreshWebpackPlugin(), // 处理JS的HMR功能
   ],
 
   // 解析
