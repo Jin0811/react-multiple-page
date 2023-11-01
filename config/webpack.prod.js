@@ -1,6 +1,6 @@
 const path = require("path");
 const { generateOptionsByModuleConfig } = require("./config.util");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // 生成entry、htmlWebpackPlugin、copyWebpackPlugin的配置项
 const { entrysObject, htmlWebpackPluginArray, copyWebpackPluginArray } = generateOptionsByModuleConfig();
@@ -36,8 +36,7 @@ module.exports = {
           // style-loader会将js中的css通过创建style标签的形式添加到页面当中
           // MiniCssExtractPlugin.loader会将CSS抽取成单独的文件，通过link标签的形式添加到页面上
           // 生产模式下，建议使用MiniCssExtractPlugin.loader
-          // MiniCssExtractPlugin.loader,
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           "css-loader", // css-loader会将css资源编译成commonjs的一个模块到js当中
         ],
       },
@@ -45,8 +44,7 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          // MiniCssExtractPlugin.loader,
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           "css-loader",
           "less-loader",
         ],
@@ -108,6 +106,10 @@ module.exports = {
   plugins: [
     ...htmlWebpackPluginArray, // 生成html文件
     ...copyWebpackPluginArray, // 复制public目录下的文件到打包目录
+    new MiniCssExtractPlugin({
+      filename: "static/css/[name].[contenthash:10].css", // 对CSS文件进行命名
+      chunkFilename: "static/css/[name].[contenthash:10].chunk.css", // 对动态导出的CSS文件进行命名
+    }),
   ],
 
   // 解析

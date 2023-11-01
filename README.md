@@ -58,4 +58,9 @@ yarn add antd@4.20.3
 # 安装相关依赖处理React热更新
 yarn add @pmmmwh/react-refresh-webpack-plugin@0.5.5 -D
 yarn add react-refresh@0.13.0 -D
+
+# 安装插件，修改CSS的引入方式为通过link标签引入
+# 未处理的时候，CSS文件被打包进了JS当中，JS在运行的时候会动态创建style标签，可能会出现闪屏，体验不好
+# 通过插件可以将CSS文件抽取为一个单独的文件，方便独立加载
+yarn add mini-css-extract-plugin@^2.6.0 -D
 ```
