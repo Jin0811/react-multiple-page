@@ -1,5 +1,6 @@
 const path = require("path");
 const { generateOptionsByModuleConfig } = require("./config.util");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 // 生成entry、htmlWebpackPlugin、copyWebpackPlugin的配置项
 const { entrysObject, htmlWebpackPluginArray, copyWebpackPluginArray } =
@@ -80,18 +81,38 @@ module.exports = {
       {
         test: /\.jsx$/,
         exclude: /node_modules/, // 排除node_modules下的文件
-        use: {
-          loader: path.resolve(
-            __dirname,
-            "./loaders/auto-import-react-loader.js"
-          ),
-        },
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              // options.presets预设等配置项建议在babel.config.js文件当中进行配置，统一管理
+              // presets: ["react-app"]
+              cacheDirectory: true, // 开启babel缓存
+              // cacheCompression 默认为 true，将缓存内容压缩为 gz 包以减⼩缓存⽬录的体积。在设为 false 的情况下将跳过压缩和解压的过程，从⽽提升这⼀阶段的速度
+              // 即不对babel的文件进行压缩，这样虽然会占用多一点的电脑空间，但是提升了速度，以空间换时间
+              cacheCompression: false,
+              plugins: [
+                "react-refresh/babel", // react项目当中开启JS的HMR功能
+              ],
+            },
+          },
+          {
+            loader: path.resolve(
+              __dirname,
+              "./loaders/auto-import-react-loader.js"
+            ),
+          },
+        ],
       },
     ],
   },
 
   // 插件
-  plugins: [...htmlWebpackPluginArray, ...copyWebpackPluginArray],
+  plugins: [
+    ...htmlWebpackPluginArray, // 生成html文件
+    ...copyWebpackPluginArray, // 复制public目录下的文件到打包目录
+    new ReactRefreshWebpackPlugin(), // 处理JS的HMR功能
+  ],
 
   // 解析
   resolve: {

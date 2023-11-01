@@ -54,4 +54,8 @@ yarn add cross-env@7.0.3 -D
 
 # 安装antd
 yarn add antd@4.20.3
+
+# 安装相关依赖处理React热更新
+yarn add @pmmmwh/react-refresh-webpack-plugin@0.5.5 -D
+yarn add react-refresh@0.13.0 -D
 ```
