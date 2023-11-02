@@ -38,6 +38,16 @@ module.exports = {
           // 生产模式下，建议使用MiniCssExtractPlugin.loader
           MiniCssExtractPlugin.loader,
           "css-loader", // css-loader会将css资源编译成commonjs的一个模块到js当中
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "postcss-preset-env", // 能解决大多数样式兼容性问题
+                ],
+              },
+            },
+          },
         ],
       },
       // 处理less
@@ -46,6 +56,16 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "postcss-preset-env", // 能解决大多数样式兼容性问题
+                ],
+              },
+            },
+          },
           "less-loader",
         ],
       },

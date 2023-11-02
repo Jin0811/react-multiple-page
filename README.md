@@ -63,4 +63,9 @@ yarn add react-refresh@0.13.0 -D
 # 未处理的时候，CSS文件被打包进了JS当中，JS在运行的时候会动态创建style标签，可能会出现闪屏，体验不好
 # 通过插件可以将CSS文件抽取为一个单独的文件，方便独立加载
 yarn add mini-css-extract-plugin@^2.6.0 -D
+
+# CSS 兼容性处理
+yarn add postcss-loader@^6.2.1 -D
+yarn add postcss@^8.4.13 -D
+yarn add postcss-preset-env@^7.5.0 -D
 ```

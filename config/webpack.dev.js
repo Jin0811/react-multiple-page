@@ -32,12 +32,39 @@ module.exports = {
       // 处理CSS
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "postcss-preset-env", // 能解决大多数样式兼容性问题
+                ],
+              },
+            },
+          },
+        ],
       },
       // 处理less
       {
         test: /\.less$/i,
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "postcss-preset-env", // 能解决大多数样式兼容性问题
+                ],
+              },
+            },
+          },
+          "less-loader",
+        ],
       },
       // 处理图片资源，针对小于20kb的图片进行base64处理，减少网络请求
       {
