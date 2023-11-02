@@ -1,6 +1,7 @@
 const path = require("path");
 const { generateOptionsByModuleConfig } = require("./config.util");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 // 生成entry、htmlWebpackPlugin、copyWebpackPlugin的配置项
 const { entrysObject, htmlWebpackPluginArray, copyWebpackPluginArray } = generateOptionsByModuleConfig();
@@ -130,6 +131,7 @@ module.exports = {
       filename: "static/css/[name].[contenthash:10].css", // 对CSS文件进行命名
       chunkFilename: "static/css/[name].[contenthash:10].chunk.css", // 对动态导出的CSS文件进行命名
     }),
+    new CssMinimizerPlugin(), // 压缩CSS
   ],
 
   // 解析

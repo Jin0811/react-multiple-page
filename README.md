@@ -64,8 +64,11 @@ yarn add react-refresh@0.13.0 -D
 # 通过插件可以将CSS文件抽取为一个单独的文件，方便独立加载
 yarn add mini-css-extract-plugin@^2.6.0 -D
 
-# CSS 兼容性处理
+# CSS兼容性处理
 yarn add postcss-loader@^6.2.1 -D
 yarn add postcss@^8.4.13 -D
 yarn add postcss-preset-env@^7.5.0 -D
+
+# CSS压缩
+yarn add css-minimizer-webpack-plugin -D
 ```
