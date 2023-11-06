@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js"
+    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js",
+    "prepare": "npx husky install"
   },
   "browserslist": [
     "last 2 version",
@@ -15,6 +16,8 @@
   ],
   "devDependencies": {
     "@babel/core": "7.17.10",
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
     "babel-loader": "8.2.5",
     "babel-preset-react-app": "10.0.1",
@@ -22,7 +25,9 @@
     "cross-env": "7.0.3",
     "css-loader": "6.7.1",
     "css-minimizer-webpack-plugin": "^5.0.1",
+    "cz-customizable": "^7.0.0",
     "html-webpack-plugin": "5.5.0",
+    "husky": "^8.0.3",
     "less": "4.1.2",
     "less-loader": "10.2.0",
     "mini-css-extract-plugin": "^2.6.0",
@@ -40,5 +45,10 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
   }
 }
