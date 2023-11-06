@@ -10,6 +10,11 @@ module.exports = {
 		parser: "@babel/eslint-parser",
 		sourceType: "module",
 	},
+	settings: {
+		react: {
+			version: "detect",
+		},
+	},
 	// 设置eslint全局变量
 	globals: {},
 	// 0是关闭，1是警告，2是错误
