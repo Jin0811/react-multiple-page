@@ -4,9 +4,14 @@
  */
 
 import { HashRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const RootComponent = (props) => {
-  return <HashRouter>{props.children}</HashRouter>;
+	return <HashRouter>{props.children}</HashRouter>;
+};
+
+RootComponent.propTypes = {
+	children: PropTypes.element,
 };
 
 export default RootComponent;

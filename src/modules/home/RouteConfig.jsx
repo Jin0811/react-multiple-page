@@ -7,21 +7,21 @@ import List from "./views/List";
 import Detail from "./views/Detail";
 
 const RouteElement = () => {
-  const RouteConfig = [
-    {
-      path: "/",
-      element: <Navigate to="/List" replace />,
-    },
-    {
-      path: "/List",
-      element: <List />,
-    },
-    {
-      path: "/Detail",
-      element: <Detail />,
-    },
-  ];
-  return useRoutes(RouteConfig);
+	const RouteConfig = [
+		{
+			path: "/",
+			element: <Navigate to="/List" replace />,
+		},
+		{
+			path: "/List",
+			element: <List />,
+		},
+		{
+			path: "/Detail",
+			element: <Detail />,
+		},
+	];
+	return useRoutes(RouteConfig);
 };
 
 export default RouteElement;

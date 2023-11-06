@@ -7,7 +7,7 @@ import "antd/dist/antd.css"; // antd样式
 // 挂载根节点组件
 const root = ReactDOM.createRoot(document.getElementById("app"));
 root.render(
-  <RootComponent>
-    <RouteConfig />
-  </RootComponent>
+	<RootComponent>
+		<RouteConfig />
+	</RootComponent>
 );

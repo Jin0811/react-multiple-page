@@ -41,6 +41,7 @@ yarn add babel-preset-react-app@10.0.1 -D
 yarn add react@^18.1.0
 yarn add react-dom@^18.1.0
 yarn add react-router-dom@^6.3.0
+yarn add prop-types -D
 
 # 在package.json当中配置browserslist字段，配置需要兼容的浏览器
 "browserslist": [
