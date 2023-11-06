@@ -71,4 +71,10 @@ yarn add postcss-preset-env@^7.5.0 -D
 
 # CSS压缩
 yarn add css-minimizer-webpack-plugin -D
+
+# 集成husky和commitlint
+yarn add @commitlint/cli -D
+yarn add @commitlint/config-conventional -D
+yarn add husky -D
+yarn add cz-customizable -D
 ```
