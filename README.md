@@ -86,4 +86,7 @@ yarn add eslint-plugin-prettier@^4.0.0 -D
 yarn add prettier@^2.4.1 -D
 yarn add @babel/eslint-parser@^7.12.16 -D
 yarn add eslint-plugin-react@^7.33.2 -D
+
+# 配置lint-staged
+yarn add lint-staged@^13.2.3 -D
 ```

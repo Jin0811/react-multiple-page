@@ -10,7 +10,8 @@
 		"prepare": "npx husky install",
 		"lint": "eslint src --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
 		"commit": "git cz",
-		"prettier": "npx prettier --write src"
+		"prettier": "npx prettier --write src",
+		"lintStaged": "lint-staged"
 	},
 	"browserslist": [
 		"last 2 version",
@@ -38,6 +39,7 @@
 		"husky": "^8.0.3",
 		"less": "4.1.2",
 		"less-loader": "10.2.0",
+		"lint-staged": "^13.2.3",
 		"mini-css-extract-plugin": "^2.6.0",
 		"postcss": "^8.4.13",
 		"postcss-loader": "^6.2.1",
@@ -55,6 +57,11 @@
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-router-dom": "^6.3.0"
+	},
+	"lint-staged": {
+		"src/**/*.{vue,js,ts,jsx,tsx}": [
+			"eslint"
+		]
 	},
 	"config": {
 		"commitizen": {
