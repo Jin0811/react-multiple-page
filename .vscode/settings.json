@@ -1,0 +1,53 @@
+{
+	"editor.tabSize": 2, // 一个制表符等于的空格数
+	"editor.indentSize": "tabSize", // 缩进格式
+	"editor.formatOnSave": true, // 设置保存文件时是否自动格式化
+	"editor.defaultFormatter": "esbenp.prettier-vscode", // 设置编辑器的默认格式化工具
+	"editor.insertSpaces": false, // 设置缩进的格式为Tab，这样新增文件时，文件的默认缩进格式就是Tab
+	// 设置保存的时候，自动修复eslint错误
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+		"source.fixAll.stylelint": true,
+		"eslint.autoFixOnSave": true
+	},
+
+	"files.eol": "\n", // 默认行尾字符
+	"files.encoding": "utf8", // 文件编码格式
+
+	// eslint相关配置
+	"eslint.enable": true, // 启用eslint
+	"eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue"],
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue"], // eslint校验的文件类型
+	"eslint.options": {
+		"extensions": [".js", ".vue", ".ts", ".tsx"]
+	}, // 指定eslint所处理的文件的后缀
+
+	// stylelint相关配置
+	"stylelint.validate": ["css", "less", "scss", "postcss", "vue"], // 设置stylelint校验的文件类型
+
+	// prettier相关配置
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[less]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}

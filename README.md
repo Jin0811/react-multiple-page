@@ -77,4 +77,12 @@ yarn add @commitlint/cli -D
 yarn add @commitlint/config-conventional -D
 yarn add husky -D
 yarn add cz-customizable -D
+
+# 集成eslint和prettier
+yarn add eslint@^7.32.0 -D
+yarn add eslint-config-prettier@^8.8.0 -D
+yarn add eslint-plugin-prettier@^4.0.0 -D
+yarn add prettier@^2.4.1 -D
+yarn add @babel/eslint-parser@^7.12.16 -D
+yarn add eslint-plugin-react@^7.33.2 -D
 ```
